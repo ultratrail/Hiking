@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-3">
+      <span class="logo img-fluid rounded"></span>
+  </div>
+
+
+
+    <div class="col-md-9">
+        <h1 class="display-4">Welcome, UltraTeam 7.1!</h1>
+        <p class="lead">This is UltraTeam7.1 homepage</p>
+
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span *ngIf="account"
+                   > You are logged in. </span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>You don't have an account yet?</span>
+                <a class="alert-link" routerLink="register">Register a new account</a>
+            </div>
+        </div>
+
+        <p style= "textalign : center">
+          This project is a project carried out by two teams, this is the server part with data visualization.
+
+          The first team composed of Enzo MOLION and Léo VALETTE UltraTeamMV is in charge of creating a mobile application allowing the members of a team or a group of hikers to locate each other with different information such as walking speed, distance between users, the possibility to see if a user is in distress (e. g. if he has broken a leg), etc.
+
+          This application will use the LoRa network with ESP-32 cards, connected via Bluetooth to the team's smartphones to run.
+
+          The smartphones of the team, if they are connected to the 3G/4G network, will send through a REST API all the information accumulated during the hike to a server that our team composed of Bastien TERRIER and Hugo GROS-DAILLON will have to set up.
+
+          This server will be implemented with the JHipster application generator. It will be a web application allowing hikers to create an account and thanks to the information provided by the mobile application, to visualize the information of the current or completed hike (with the route taken during the hike, average speed, participating members, etc.).
+
+          It can also be used to visualize the position of hikers during a hike and display whether a person sent a distress signal with their smartphone. This can be useful in cases where rescue workers are trying to locate the injured person precisely.
+        </p>
+        <p>
+            If you have any question on our Project:
+        </p>
+
+        <ul>
+            <li><a href="https://air.imag.fr/index.php/RICM4_2017_2018_-_UltraTeam_7.1" target="_blank" rel="noopener">UltraTeam7.1 homepage</a></li>
+
+            <li><a href="https://gricad-gitlab.univ-grenoble-alpes.fr/Projet-RICM4/17-18/7.1" target="_blank" rel="noopener">UltraTeam7.1 gricad-gitlab</a></li>
+
+            <li><a href="https://air.imag.fr/index.php/UltraTeam" target="_blank" rel="noopener">UltraTeam project</a></li>
+
+        </ul>
+
+        <p>
+            <span>Data is collected by an android application</span><a href="https://air.imag.fr/index.php/RICM4_2017_2018_-_UltraTeamMV" target="_blank" rel="noopener">UltraTeamMV</a>
+        </p>
+        <p>
+            <span>If you like UltraTeam, don't forget to give us a star on</span> <a href="https://github.com/ultratrail" target="_blank" rel="noopener">GitHub</a>!
+        </p>
+
+        <p>
+            Realized by GROS-DAILLON Hugo and TERRIER Bastien.
+        </p>
+    </div>
+</div>

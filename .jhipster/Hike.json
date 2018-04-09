@@ -1,0 +1,46 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "message",
+            "otherEntityName": "message",
+            "otherEntityRelationshipName": "hike"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "walker",
+            "otherEntityName": "hiker",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "itinerary"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "hikename",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "meetingplace",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "positivedrop",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "duration",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "changelogDate": "20180306152738",
+    "entityTableName": "hike",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false
+}

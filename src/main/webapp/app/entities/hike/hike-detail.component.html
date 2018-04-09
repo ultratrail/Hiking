@@ -1,0 +1,46 @@
+<div style="width: 100%;">
+    <div style="display:inline-block; width: 20%">
+        <div *ngIf="messages.length ==0" class="text-center">
+            No messages founded... <span class="fa fa-frown-o"></span>
+        </div>
+        <div *ngIf="!messages" class="text-center">
+            No messages founded... there is a problem.
+        </div>
+        <div *ngIf="hike">
+            <h2><span>{{hike.hikename}}</span></h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Meeting place</span></dt>
+                <dd>
+                    <span>{{hike.meetingplace}}</span>
+                </dd>
+                <dt><span>Positive drop</span></dt>
+                <dd>
+                    <span>{{hike.positivedrop}} meters</span>
+                </dd>
+                <dt><span>Duration</span></dt>
+                <dd>
+                    <span>{{hike.duration}} minutes</span>
+                </dd>
+                <dt><span>Date</span></dt>
+                <dd>
+                    <span>{{hike.date | date:'medium'}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+             <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+         </button>
+
+        </div>
+
+    </div>
+
+    <div style="    display: inline-block; align-items: center; margin-left: 20%; margin-right: 20%">
+        <div class="leaflet-container leaflet-fade-anim leaflet-grab leaflet-touch-drag" style="width: 600px; height: 400px; outline: medium none currentcolor;  border-style: solid;  border-color: black;" leaflet [leafletOptions]="options" (leafletMapReady)="onMapReady($event)">
+        </div>
+    </div>
+
+</div>
+<div style="clear:both"></div>

@@ -1,0 +1,60 @@
+
+<div *ngIf="hiker">
+    <h2><span>Hiker</span> {{hiker.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Firstname</span></dt>
+        <dd>
+            <span>{{hiker.firstname}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{hiker.name}}</span>
+        </dd>
+        <dt><span>Sex</span></dt>
+        <dd>
+            <span>{{hiker.sex}}</span>
+        </dd>
+        <dt><span>Birthdate</span></dt>
+        <dd>
+            <span>{{hiker.birthdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Phonenumber</span></dt>
+        <dd>
+            <span>{{hiker.phonenumber}}</span>
+        </dd>
+        <dt><span>Anaerobicmaximumspeed</span></dt>
+        <dd>
+            <span>{{hiker.anaerobicmaximumspeed}}</span>
+        </dd>
+        <dt><span>Weight</span></dt>
+        <dd>
+            <span>{{hiker.weight}}</span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{hiker.user?.id}}
+        </dd>
+        <dt><span>Itinerary</span></dt>
+        <dd>
+            <span *ngFor="let itinerary of hiker.itineraries; let last = last">
+                <a [routerLink]="['/hike', itinerary?.id ]">{{itinerary.id}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hiker/'+ hiker.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

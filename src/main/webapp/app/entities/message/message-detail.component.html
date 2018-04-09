@@ -1,0 +1,58 @@
+
+<div *ngIf="message">
+    <h2><span>Message</span> {{message.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Longitude</span></dt>
+        <dd>
+            <span>{{message.longitude}}</span>
+        </dd>
+        <dt><span>Latitude</span></dt>
+        <dd>
+            <span>{{message.latitude}}</span>
+        </dd>
+        <dt><span>Datetime</span></dt>
+        <dd>
+            <span>{{message.datetime | date:'medium'}}</span>
+        </dd>
+        <dt><span>Sos</span></dt>
+        <dd>
+            <span>{{message.sos}}</span>
+        </dd>
+        <dt><span>Esp ON</span></dt>
+        <dd>
+            <span>{{message.espON}}</span>
+        </dd>
+        <dt><span>Heartrate</span></dt>
+        <dd>
+            <span>{{message.heartrate}}</span>
+        </dd>
+        <dt><span>Sender</span></dt>
+        <dd>
+            <div *ngIf="message.sender">
+                <a [routerLink]="['/hiker', message.sender?.id]">{{message.sender?.id}}</a>
+            </div>
+        </dd>
+        <dt><span>Hike</span></dt>
+        <dd>
+            <div *ngIf="message.hike">
+                <a [routerLink]="['/hike', message.hike?.id]">{{message.hike?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'message/'+ message.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

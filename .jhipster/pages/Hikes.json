@@ -1,0 +1,12 @@
+{
+    "pages": [
+        {
+            "pageName": "My hikes",
+            "pageType": "getOneFromServer",
+            "pageGlyphIcon": "glyphicon-leaf",
+            "fields": []
+        }
+    ],
+    "pageSetGlyphIcon": "",
+    "changelogDate": "20180320120759"
+}

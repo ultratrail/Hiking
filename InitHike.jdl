@@ -1,0 +1,52 @@
+enum Sex {
+    MAN, WOMAN
+  }
+
+entity Hiker {
+  firstname String required
+  name String required
+  sex Sex
+  birthdate LocalDate
+  phone_number String
+  anaerobic_maximum_speed  Integer
+  weight Integer
+}
+paginate Hiker with pagination
+service Hiker with serviceClass
+
+entity Message {
+  longitude Double required min(0) max(360)
+  latitude Double required min(0) max(360)
+  date_time ZonedDateTime required
+  sos Boolean required
+  espON Boolean required
+  heart_rate Integer
+}
+paginate Message with pagination
+service Message with serviceClass
+
+entity Hike {
+  hike_name String
+  meeting_place String
+  positive_drop Integer
+  duration Integer
+  date ZonedDateTime
+
+}
+paginate Hike with pagination
+service Hike with serviceClass
+
+
+relationship ManyToMany {
+    Hiker{itinerary} to Hike{walker}
+}
+relationship OneToMany {
+    Hiker{position} to Message{sender}
+}
+
+relationship OneToMany {
+    Hike{message} to Message{hike}
+}
+relationship OneToOne {
+    Hiker{user} to User{participant}
+}

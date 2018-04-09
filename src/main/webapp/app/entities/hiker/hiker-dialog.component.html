@@ -1,0 +1,92 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHikerLabel">Create or edit a Hiker</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!hiker.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="hiker.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_firstname">Firstname</label>
+            <input type="text" class="form-control" name="firstname" id="field_firstname"
+                [(ngModel)]="hiker.firstname" required/>
+            <div [hidden]="!(editForm.controls.firstname?.dirty && editForm.controls.firstname?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstname?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="hiker.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sex">Sex</label>
+            <select class="form-control" name="sex" [(ngModel)]="hiker.sex" id="field_sex" >
+                <option value="MAN">MAN</option>
+                <option value="WOMAN">WOMAN</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_birthdate">Birthdate</label>
+            <div class="input-group">
+                <input id="field_birthdate" type="text" class="form-control" name="birthdate" ngbDatepicker  #birthdateDp="ngbDatepicker" [(ngModel)]="hiker.birthdate"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="birthdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_phonenumber">Phonenumber</label>
+            <input type="text" class="form-control" name="phonenumber" id="field_phonenumber"
+                [(ngModel)]="hiker.phonenumber" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_anaerobicmaximumspeed">Anaerobicmaximumspeed</label>
+            <input type="number" class="form-control" name="anaerobicmaximumspeed" id="field_anaerobicmaximumspeed"
+                [(ngModel)]="hiker.anaerobicmaximumspeed" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_weight">Weight</label>
+            <input type="number" class="form-control" name="weight" id="field_weight"
+                [(ngModel)]="hiker.weight" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="hiker.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === hiker.user?.id ? hiker.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_itinerary">Itinerary</label>
+            <select class="form-control" id="field_itinerary" multiple name="itinerary" [(ngModel)]="hiker.itineraries">
+                <option [ngValue]="getSelected(hiker.itineraries, hikeOption)" *ngFor="let hikeOption of hikes; trackBy: trackHikeById">{{hikeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

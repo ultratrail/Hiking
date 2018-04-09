@@ -1,0 +1,61 @@
+<div>
+    <h2><span>My hikes</span></h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+
+    <div class="table-responsive" *ngIf="myHikes">
+        <table class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th><span>Hike name</span></th>
+                    <th><span>Meeting place</span></th>
+                    <th><span>Positive drop</span></th>
+                    <th><span>Duration</span></th>
+                    <th><span>Date</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let hike of hikes ;trackBy: trackId">
+                    <td>{{hike.hikename}}</td>
+                    <td>{{hike.meetingplace}}</td>
+                    <td>{{hike.positivedrop}} meters</td>
+                    <td>{{hike.duration}} minutes</td>
+                    <td>{{hike.date}}</td>
+
+                    <td class="text-right">
+                        <button type="submit" [routerLink]="['../hike', hike.id ]" class="btn btn-success btn-sm">
+                          <span class="fa fa-eye"></span>
+                          <span class="d-none d-md-inline">Details</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <div *ngIf="hikes.length ==0" class="text-center">
+            Il n'y a pas de résultats correspondant à votre recherche... <span class="fa fa-frown-o"></span>
+        </div>
+
+        <div *ngIf="!hikes" class="text-center">
+            pas de hikes, pb
+        </div>
+
+    </div>
+
+    <div class="table-responsive" *ngIf="myHikes">
+        <table class="table table-striped">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let myHikes of myHikes ;trackBy: trackId">
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

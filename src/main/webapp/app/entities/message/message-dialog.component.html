@@ -1,0 +1,129 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMessageLabel">Create or edit a Message</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!message.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="message.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_longitude">Longitude</label>
+            <input type="number" class="form-control" name="longitude" id="field_longitude"
+                [(ngModel)]="message.longitude" required min="0" max="360"/>
+            <div [hidden]="!(editForm.controls.longitude?.dirty && editForm.controls.longitude?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.longitude?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.longitude?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.longitude?.errors?.max">
+                    This field cannot be more than 360.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.longitude?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_latitude">Latitude</label>
+            <input type="number" class="form-control" name="latitude" id="field_latitude"
+                [(ngModel)]="message.latitude" required min="0" max="360"/>
+            <div [hidden]="!(editForm.controls.latitude?.dirty && editForm.controls.latitude?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.latitude?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.latitude?.errors?.min">
+                    This field should be at least 0.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.latitude?.errors?.max">
+                    This field cannot be more than 360.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.latitude?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_datetime">Datetime</label>
+            <div class="d-flex">
+                <input id="field_datetime" type="datetime-local" class="form-control" name="datetime" [(ngModel)]="message.datetime"
+                required/>
+            </div>
+            <div [hidden]="!(editForm.controls.datetime?.dirty && editForm.controls.datetime?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.datetime?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.datetime?.errors?.ZonedDateTimelocal">
+                    This field should be a date and time.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_sos">Sos</label>
+            <input type="checkbox" class="form-control" name="sos" id="field_sos"
+                [(ngModel)]="message.sos" />
+            <div [hidden]="!(editForm.controls.sos?.dirty && editForm.controls.sos?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sos?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_espON">Esp ON</label>
+            <input type="checkbox" class="form-control" name="espON" id="field_espON"
+                [(ngModel)]="message.espON" />
+            <div [hidden]="!(editForm.controls.espON?.dirty && editForm.controls.espON?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.espON?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_heartrate">Heartrate</label>
+            <input type="number" class="form-control" name="heartrate" id="field_heartrate"
+                [(ngModel)]="message.heartrate" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_sender">Sender</label>
+            <select class="form-control" id="field_sender" name="sender" [(ngModel)]="message.sender" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hikerOption.id === message.sender?.id ? message.sender : hikerOption" *ngFor="let hikerOption of hikers; trackBy: trackHikerById">{{hikerOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hike">Hike</label>
+            <select class="form-control" id="field_hike" name="hike" [(ngModel)]="message.hike" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hikeOption.id === message.hike?.id ? message.hike : hikeOption" *ngFor="let hikeOption of hikes; trackBy: trackHikeById">{{hikeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
