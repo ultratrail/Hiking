@@ -1,3 +1,5 @@
+![Home Page](JHipster-UltraTeam-7.1-Home.png)
+
 # UltraTeam 7.1 : Server - Data Viz 
 This project is a project carried out by two teams, this is the server part with data visualization.
 
